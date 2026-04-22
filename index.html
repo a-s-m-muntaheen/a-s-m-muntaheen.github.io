@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A. S. M. Muntaheen — Senior Full-Stack Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0d12;
+    --surface: #111520;
+    --card: #151b28;
+    --border: #1e2a3a;
+    --accent: #00d4ff;
+    --accent2: #7c3aed;
+    --accent3: #10b981;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --heading: #f8fafc;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: 'DM Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    overflow-x: hidden;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 9999; opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(10,13,18,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--accent); letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh; display: flex; align-items: center;
+    padding: 8rem 4rem 4rem; position: relative; overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute; width: 700px; height: 700px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+    top: -100px; right: -200px; pointer-events: none;
+    animation: pulse 6s ease-in-out infinite;
+  }
+  .hero-glow2 {
+    position: absolute; width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.07) 0%, transparent 70%);
+    bottom: -100px; left: -100px; pointer-events: none;
+    animation: pulse 8s ease-in-out infinite reverse;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.15);opacity:0.7} }
+
+  .hero-content { position: relative; z-index: 1; max-width: 900px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(0,212,255,0.08); border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 2rem; padding: 0.4rem 1rem;
+    font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-badge span { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 1.5s infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  .hero-name {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 800; line-height: 0.95;
+    color: var(--heading); letter-spacing: -0.03em;
+    animation: fadeUp 0.8s 0.1s ease both;
+  }
+  .hero-name .accent { color: var(--accent); }
+  .hero-title {
+    font-family: 'Lora', serif; font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    color: var(--muted); font-style: italic; margin: 1.2rem 0 1.8rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+  .hero-desc { font-size: 1rem; line-height: 1.9; color: #94a3b8; max-width: 600px; animation: fadeUp 0.8s 0.3s ease both; }
+  .hero-stats { display: flex; gap: 3rem; margin: 2.5rem 0; animation: fadeUp 0.8s 0.4s ease both; }
+  .stat { display: flex; flex-direction: column; gap: 0.2rem; }
+  .stat-num { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--heading); line-height: 1; }
+  .stat-num .unit { color: var(--accent); font-size: 1.6rem; }
+  .stat-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.8s 0.5s ease both; }
+  .btn {
+    padding: 0.8rem 2rem; border-radius: 0.25rem;
+    font-family: 'DM Mono', monospace; font-size: 0.82rem;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    text-decoration: none; cursor: pointer; border: none; transition: all 0.25s;
+  }
+  .btn-primary { background: var(--accent); color: #000; font-weight: 500; }
+  .btn-primary:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,212,255,0.3); }
+  .btn-outline { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+  /* SECTIONS */
+  section { padding: 6rem 4rem; }
+  .section-header { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 3.5rem; }
+  .section-num { font-family: 'Syne', sans-serif; font-size: 0.8rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; }
+  .section-title { font-family: 'Syne', sans-serif; font-size: clamp(1.9rem, 3vw, 2.6rem); font-weight: 800; color: var(--heading); }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* ABOUT */
+  #about { background: var(--surface); }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+  .about-text { font-size: 0.96rem; line-height: 2; color: #94a3b8; }
+  .about-text p + p { margin-top: 1rem; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .tag { padding: 0.35rem 0.9rem; border-radius: 0.2rem; font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid var(--border); color: var(--muted); transition: all 0.2s; }
+  .tag:hover { border-color: var(--accent); color: var(--accent); }
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item { display: flex; align-items: center; gap: 1rem; padding: 1rem 1.2rem; background: var(--card); border: 1px solid var(--border); border-radius: 0.4rem; text-decoration: none; transition: all 0.25s; }
+  .contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
+  .contact-icon { font-size: 1.2rem; width: 2rem; text-align: center; }
+  .contact-detail { display: flex; flex-direction: column; gap: 0.2rem; }
+  .contact-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+  .contact-value { font-size: 0.9rem; color: var(--text); }
+
+  /* SKILLS */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .skill-card { background: var(--card); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.5rem; transition: all 0.25s; position: relative; overflow: hidden; }
+  .skill-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--ac, var(--accent)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+  .skill-card:hover::before { transform: scaleX(1); }
+  .skill-card:hover { border-color: var(--ac, var(--accent)); transform: translateY(-3px); }
+  .skill-card-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--muted); margin-bottom: 1rem; }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .pill { padding: 0.3rem 0.75rem; border-radius: 0.15rem; font-size: 0.78rem; background: rgba(255,255,255,0.04); border: 1px solid var(--border); color: #94a3b8; }
+
+  /* EXPERIENCE */
+  #experience { background: var(--surface); }
+  .timeline { display: flex; flex-direction: column; }
+  .timeline-item { display: grid; grid-template-columns: 200px 1px 1fr; gap: 0 2rem; }
+  .timeline-date { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.08em; text-align: right; padding: 2rem 0; line-height: 1.6; }
+  .timeline-line { display: flex; flex-direction: column; align-items: center; }
+  .timeline-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); margin-top: 2.3rem; flex-shrink: 0; box-shadow: 0 0 12px var(--accent); z-index: 1; }
+  .timeline-connector { flex: 1; width: 1px; background: var(--border); }
+  .timeline-item:last-child .timeline-connector { display: none; }
+  .timeline-content { padding: 1.8rem 0 3rem; }
+  .timeline-company { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.15rem; color: var(--heading); margin-bottom: 0.2rem; }
+  .timeline-role { font-size: 0.85rem; color: var(--accent); letter-spacing: 0.05em; margin-bottom: 1rem; font-style: italic; }
+  .timeline-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .timeline-bullets li { font-size: 0.9rem; line-height: 1.8; color: #94a3b8; padding-left: 1.2rem; position: relative; }
+  .timeline-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--accent3); font-size: 0.8rem; }
+
+  /* ============================================
+     PROJECTS — Enhanced Cards
+  ============================================ */
+  .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 2rem; }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    overflow: hidden;
+    transition: all 0.3s;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover {
+    border-color: rgba(0,212,255,0.35);
+    transform: translateY(-5px);
+    box-shadow: 0 24px 48px rgba(0,0,0,0.4);
+  }
+  .project-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+  }
+  .project-card:hover::after { transform: scaleX(1); }
+
+  /* Project image banner */
+  .project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+  }
+  .project-image-placeholder {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .project-image-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: var(--img-bg, linear-gradient(135deg, #0d1a2e, #1a2a40));
+  }
+  .project-image-placeholder .proj-icon { position: relative; z-index: 1; }
+  /* overlay num on image */
+  .project-image-placeholder .proj-num-overlay {
+    position: absolute; top: 1rem; right: 1rem; z-index: 2;
+    font-family: 'Syne', sans-serif; font-size: 3.5rem; font-weight: 800;
+    color: rgba(255,255,255,0.06); line-height: 1;
+  }
+
+  .project-body { padding: 1.6rem; flex: 1; display: flex; flex-direction: column; gap: 0.9rem; }
+
+  .project-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; }
+  .project-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; color: var(--heading); line-height: 1.3; }
+
+  /* URL / links row */
+  .project-links { display: flex; gap: 0.5rem; flex-shrink: 0; }
+  .project-link-btn {
+    display: inline-flex; align-items: center; gap: 0.3rem;
+    padding: 0.3rem 0.7rem; border-radius: 0.2rem;
+    font-size: 0.75rem; font-family: 'DM Mono', monospace; letter-spacing: 0.06em;
+    text-decoration: none; border: 1px solid var(--border);
+    color: var(--muted); background: rgba(255,255,255,0.03);
+    transition: all 0.2s; white-space: nowrap;
+  }
+  .project-link-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(0,212,255,0.07); }
+  .project-link-btn.github:hover { border-color: #e2e8f0; color: #e2e8f0; background: rgba(255,255,255,0.06); }
+  .project-link-btn svg { width: 12px; height: 12px; fill: currentColor; }
+
+  .project-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .stack-tag { padding: 0.2rem 0.6rem; font-size: 0.72rem; background: rgba(0,212,255,0.08); color: var(--accent); border: 1px solid rgba(0,212,255,0.15); border-radius: 0.15rem; letter-spacing: 0.04em; }
+
+  .project-desc { font-size: 0.9rem; line-height: 1.85; color: #94a3b8; }
+
+  /* Features list */
+  .project-features { margin-top: 0.2rem; }
+  .project-features-title {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--muted); margin-bottom: 0.6rem;
+  }
+  .features-list { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+  .features-list li { font-size: 0.85rem; line-height: 1.6; color: #94a3b8; padding-left: 1.1rem; position: relative; }
+  .features-list li::before { content: '✦'; position: absolute; left: 0; color: var(--accent2); font-size: 0.55rem; top: 0.35rem; }
+
+  .project-highlight {
+    margin-top: auto;
+    padding: 0.75rem 1rem;
+    background: rgba(16,185,129,0.06);
+    border-left: 2px solid var(--accent3);
+    font-size: 0.84rem; color: var(--accent3); line-height: 1.6;
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+
+  /* EDUCATION */
+  #education { background: var(--surface); }
+  .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+  .edu-card { background: var(--card); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.6rem; transition: all 0.25s; }
+  .edu-card:hover { border-color: var(--accent2); transform: translateY(-3px); }
+  .edu-degree { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1rem; color: var(--heading); margin-bottom: 0.4rem; }
+  .edu-school { font-size: 0.86rem; color: var(--accent2); margin-bottom: 0.3rem; font-style: italic; }
+  .edu-period { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.08em; }
+  .edu-badge { display: inline-block; margin-top: 0.8rem; padding: 0.25rem 0.7rem; border-radius: 0.15rem; background: rgba(124,58,237,0.1); border: 1px solid rgba(124,58,237,0.2); font-size: 0.72rem; color: var(--accent2); letter-spacing: 0.08em; }
+
+  /* CERTS */
+  .certs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+  .cert-card { display: flex; align-items: flex-start; gap: 1rem; background: var(--card); border: 1px solid var(--border); border-radius: 0.4rem; padding: 1.3rem; transition: all 0.25s; }
+  .cert-card:hover { border-color: var(--accent3); }
+  .cert-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .cert-name { font-size: 0.9rem; color: var(--heading); font-weight: 500; margin-bottom: 0.3rem; }
+  .cert-org { font-size: 0.78rem; color: var(--muted); }
+
+  /* PUBLICATIONS */
+  #publications { background: var(--surface); }
+  .pub-card { background: var(--card); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1.6rem; margin-bottom: 1rem; transition: all 0.25s; }
+  .pub-card:hover { border-color: rgba(0,212,255,0.3); transform: translateX(4px); }
+  .pub-title { font-size: 0.96rem; color: var(--heading); margin-bottom: 0.5rem; font-style: italic; }
+  .pub-meta { font-size: 0.82rem; color: var(--muted); display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; }
+  .pub-venue { color: var(--accent3); }
+  .pub-link { display: inline-flex; align-items: center; gap: 0.3rem; color: var(--accent); font-size: 0.8rem; text-decoration: none; padding: 0.25rem 0.7rem; border: 1px solid rgba(0,212,255,0.2); border-radius: 0.15rem; transition: all 0.2s; }
+  .pub-link:hover { background: rgba(0,212,255,0.1); }
+  .pub-scholar-link { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.5rem; padding: 0.75rem 1.5rem; background: transparent; border: 1px solid var(--border); border-radius: 0.3rem; color: var(--text); text-decoration: none; font-size: 0.85rem; letter-spacing: 0.08em; transition: all 0.25s; }
+  .pub-scholar-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--muted); }
+  .footer-social { display: flex; gap: 1.5rem; }
+  .footer-social a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+  .footer-social a:hover { color: var(--accent); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 4rem 1.5rem; }
+    #hero { padding: 7rem 1.5rem 4rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .timeline-item { grid-template-columns: 1px 1fr; }
+    .timeline-date { display: none; }
+    .hero-stats { gap: 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">ASM.dev</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#publications">Publications</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span></span> Available for Remote &amp; Global Opportunities</div>
+    <h1 class="hero-name">A. S. M.<br><span class="accent">Muntaheen</span></h1>
+    <p class="hero-title">Senior Full-Stack Software Developer</p>
+    <p class="hero-desc">13 years building secure, scalable web systems across FinTech, GIS, and banking. Expert in Python (Django), C# (.NET), and PL/SQL — delivering solutions that eliminate manual bottlenecks and drive data-driven decisions at enterprise scale.</p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">13<span class="unit">+</span></div><div class="stat-label">Years Experience</div></div>
+      <div class="stat"><div class="stat-num">100<span class="unit">%</span></div><div class="stat-label">Manual Elimination</div></div>
+      <div class="stat"><div class="stat-num">5<span class="unit">+</span></div><div class="stat-label">Major Sectors</div></div>
+    </div>
+    <div class="hero-cta">
+      <a href="mailto:muntaheen.jobs@gmail.com" class="btn btn-primary">Get In Touch</a>
+      <a href="#projects" class="btn btn-outline">View Projects</a>
+      <a href="https://scholar.google.com/citations?user=xkqNzC0AAAAJ&hl=en" target="_blank" class="btn btn-outline">Google Scholar ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header reveal">
+    <span class="section-num">01</span>
+    <h2 class="section-title">About</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="about-text">
+        <p>Innovative Full-Stack Software Developer with 13 years of experience developing secure and scalable web-based systems across FinTech, GIS, and banking sectors. I specialize in architecting end-to-end solutions — from database design to production deployment — with a strong focus on performance, security, and measurable impact.</p>
+        <p>Currently pursuing a PhD in Data Science at BUET while staying hands-on with production engineering. I've led cross-functional teams, built national-scale GIS platforms, and engineered core banking systems processing thousands of daily transactions with zero manual intervention.</p>
+      </div>
+      <div class="about-tags">
+        <span class="tag">Python</span><span class="tag">Django</span><span class="tag">React</span>
+        <span class="tag">C# .NET</span><span class="tag">PostgreSQL</span><span class="tag">GIS</span>
+        <span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">PL/SQL</span>
+        <span class="tag">Machine Learning</span><span class="tag">Power BI</span>
+      </div>
+    </div>
+    <div class="contact-info reveal">
+      <a href="mailto:muntaheen.jobs@gmail.com" class="contact-item">
+        <span class="contact-icon">✉</span>
+        <div class="contact-detail"><span class="contact-label">Email</span><span class="contact-value">muntaheen.jobs@gmail.com</span></div>
+      </a>
+      <a href="tel:+8801743832829" class="contact-item">
+        <span class="contact-icon">☎</span>
+        <div class="contact-detail"><span class="contact-label">Phone</span><span class="contact-value">(+880) 1743832829</span></div>
+      </a>
+      <div class="contact-item">
+        <span class="contact-icon">📍</span>
+        <div class="contact-detail"><span class="contact-label">Location</span><span class="contact-value">Dhaka, Bangladesh</span></div>
+      </div>
+      <a href="https://linkedin.com" target="_blank" class="contact-item">
+        <span class="contact-icon">in</span>
+        <div class="contact-detail"><span class="contact-label">LinkedIn</span><span class="contact-value">View Profile ↗</span></div>
+      </a>
+      <a href="https://github.com" target="_blank" class="contact-item">
+        <span class="contact-icon">⌥</span>
+        <div class="contact-detail"><span class="contact-label">GitHub</span><span class="contact-value">View Repositories ↗</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header reveal">
+    <span class="section-num">02</span>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card reveal" style="--ac:#00d4ff">
+      <div class="skill-card-label">Programming &amp; Scripting</div>
+      <div class="skill-pills"><span class="pill">Python</span><span class="pill">C#</span><span class="pill">JavaScript</span><span class="pill">SQL</span><span class="pill">PL/SQL</span></div>
+    </div>
+    <div class="skill-card reveal" style="--ac:#7c3aed">
+      <div class="skill-card-label">Frontend</div>
+      <div class="skill-pills"><span class="pill">React (TypeScript)</span><span class="pill">MUI</span><span class="pill">React Router</span><span class="pill">Axios</span><span class="pill">Responsive UI</span></div>
+    </div>
+    <div class="skill-card reveal" style="--ac:#10b981">
+      <div class="skill-card-label">Backend &amp; APIs</div>
+      <div class="skill-pills"><span class="pill">Django</span><span class="pill">DRF</span><span class="pill">Flask</span><span class="pill">ASP.NET Core</span><span class="pill">FastAPI</span><span class="pill">GraphQL</span><span class="pill">JWT</span></div>
+    </div>
+    <div class="skill-card reveal" style="--ac:#f59e0b">
+      <div class="skill-card-label">Databases</div>
+      <div class="skill-pills"><span class="pill">PostgreSQL + PostGIS</span><span class="pill">MS SQL Server</span><span class="pill">Oracle</span><span class="pill">MySQL</span></div>
+    </div>
+    <div class="skill-card reveal" style="--ac:#06b6d4">
+      <div class="skill-card-label">GIS &amp; Geospatial</div>
+      <div class="skill-pills"><span class="pill">Web GIS</span><span class="pill">Spatial Modeling</span><span class="pill">ArcGIS</span><span class="pill">GeoServer</span><span class="pill">OpenLayers</span></div>
+    </div>
+    <div class="skill-card reveal" style="--ac:#ec4899">
+      <div class="skill-card-label">Cloud &amp; DevOps</div>
+      <div class="skill-pills"><span class="pill">AWS</span><span class="pill">Azure</span><span class="pill">Docker</span><span class="pill">Kubernetes</span><span class="pill">CI/CD</span><span class="pill">Linux</span></div>
+    </div>
+    <div class="skill-card reveal" style="--ac:#84cc16">
+      <div class="skill-card-label">Data Analytics &amp; AI</div>
+      <div class="skill-pills"><span class="pill">Pandas</span><span class="pill">NumPy</span><span class="pill">Power BI</span><span class="pill">Jupyter</span><span class="pill">TensorFlow</span><span class="pill">PyTorch</span></div>
+    </div>
+    <div class="skill-card reveal" style="--ac:#f97316">
+      <div class="skill-card-label">Practices &amp; AI Tools</div>
+      <div class="skill-pills"><span class="pill">Agile/Scrum</span><span class="pill">TDD</span><span class="pill">Clean Architecture</span><span class="pill">Cursor</span><span class="pill">Claude</span><span class="pill">GitHub Copilot</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-header reveal">
+    <span class="section-num">03</span>
+    <h2 class="section-title">Experience</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item reveal">
+      <div class="timeline-date">Jan 2025 — Dec 2025<br><br><span style="color:var(--accent);font-size:0.72rem">Remote</span></div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-company">QualFix LLC</div>
+        <div class="timeline-role">Senior Data and Development Manager</div>
+        <ul class="timeline-bullets">
+          <li>Led and hands-on built 2 production-grade full-stack web apps using React, Django, and PostgreSQL — owning architecture, API design, data modeling, and performance optimization.</li>
+          <li>Designed backend-driven scoring engines, integrated secure document workflows, payments, notifications, and RBAC dashboards, reducing manual effort by ~60–70%.</li>
+          <li>Engineered sub-1s API responses and 99.9% transaction success using JWT/RBAC, async processing, rate limiting, audit logs, and monitoring.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">Feb 2023 — Dec 2024<br><br><span style="color:var(--accent);font-size:0.72rem">Dhaka</span></div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-company">Pubali Bank PLC</div>
+        <div class="timeline-role">Senior Officer — Data Analyst / Software Developer</div>
+        <ul class="timeline-bullets">
+          <li>Developed and maintained 4 core banking systems within the CBS framework using C# and Oracle, ensuring optimal performance and operational stability.</li>
+          <li>Designed REST APIs with 3+ cross-functional teams and automated transaction processing using PL/SQL, eliminating 100% manual execution.</li>
+          <li>Built complex SQL-based reports and data visualizations that improved decision-making and contributed to a ~2% increase in profit.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">Apr 2021 — Feb 2023<br><br><span style="color:var(--accent);font-size:0.72rem">Dhaka</span></div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-company">Ministry of Land, Bangladesh</div>
+        <div class="timeline-role">Consultant — Data Analyst / Programmer (National GIS Land Zoning Project)</div>
+        <ul class="timeline-bullets">
+          <li>Led a 5-member team to design and deliver a GIS-based national land zoning web application at Mouza/Plot level for government-scale spatial decision-making.</li>
+          <li>Designed enterprise database architecture producing 10+ management reports through complex SQL with tables, views, functions, stored procedures, and triggers.</li>
+          <li>Built 3 interactive Power BI dashboards and a Python web scraper (BeautifulSoup, Selenium) for spatial and operational data analysis.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="timeline-item reveal">
+      <div class="timeline-date">Apr 2013 — Apr 2021<br><br><span style="color:var(--accent);font-size:0.72rem">Dhaka</span></div>
+      <div class="timeline-line"><div class="timeline-dot"></div><div class="timeline-connector"></div></div>
+      <div class="timeline-content">
+        <div class="timeline-company">Institute of Water Modelling (IWM)</div>
+        <div class="timeline-role">Junior Database / Software Analyst</div>
+        <ul class="timeline-bullets">
+          <li>Designed, developed, and implemented 3 web portals, 1 ERP solution, and 5 Web GIS applications, increasing the annual company turnover by 5%.</li>
+          <li>Built 20+ complex SQL-based reporting and BI dashboards with maps, graphs, charts, and filters enabling data-driven decisions for management and stakeholders.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header reveal">
+    <span class="section-num">04</span>
+    <h2 class="section-title">Selected Projects</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+
+    <!-- Project 01 -->
+    <div class="project-card reveal">
+      <div class="project-image-placeholder" style="--img-bg: linear-gradient(135deg, #0d1f3c 0%, #0f3460 50%, #16213e 100%)">
+        <span class="proj-icon">⚙️</span>
+        <span class="proj-num-overlay">01</span>
+        <!-- Decorative grid lines -->
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.15" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+          <defs><pattern id="g1" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00d4ff" stroke-width="0.5"/></pattern></defs>
+          <rect width="400" height="200" fill="url(#g1)"/>
+          <circle cx="200" cy="100" r="60" fill="none" stroke="#00d4ff" stroke-width="1" opacity="0.5"/>
+          <circle cx="200" cy="100" r="40" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.3"/>
+        </svg>
+      </div>
+      <div class="project-body">
+        <div class="project-header">
+          <div class="project-name">Registration Management System</div>
+          <div class="project-links">
+            <a href="#" class="project-link-btn" title="Live Demo">
+              <svg viewBox="0 0 24 24"><path d="M10 6v2H5v11h11v-5h2v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1h6zm11-3v8h-2V6.413l-7.793 7.794-1.414-1.414L17.585 5H13V3h8z"/></svg>
+              Live
+            </a>
+            <a href="#" class="project-link-btn github" title="GitHub">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              Code
+            </a>
+          </div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">React (TypeScript)</span><span class="stack-tag">Django</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">REST API</span><span class="stack-tag">Nginx</span><span class="stack-tag">Gunicorn</span>
+        </div>
+        <p class="project-desc">Production-ready workflow automation platform with RBAC-enforced approval workflows, audit logging, and automated Excel/PDF reporting. Single-handedly executed full SDLC from requirements to deployment.</p>
+        <div class="project-features">
+          <div class="project-features-title">Key Features</div>
+          <ul class="features-list">
+            <li>Role-Based Access Control (RBAC) with multi-level approval workflows</li>
+            <li>Automated Excel & PDF report generation on every submission</li>
+            <li>Full audit trail with timestamped action logs</li>
+            <li>Zero-downtime deployment via Nginx + Gunicorn on Linux</li>
+            <li>End-to-end SDLC ownership — requirements to production</li>
+          </ul>
+        </div>
+        <div class="project-highlight">⚡ Reduced processing time by 70% — deployed on Nginx + Gunicorn with zero downtime.</div>
+      </div>
+    </div>
+
+    <!-- Project 02 -->
+    <div class="project-card reveal">
+      <div class="project-image-placeholder" style="--img-bg: linear-gradient(135deg, #1a0533 0%, #2d1b69 50%, #0f172a 100%)">
+        <span class="proj-icon">🏦</span>
+        <span class="proj-num-overlay">02</span>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.15" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+          <defs><pattern id="g2" width="50" height="50" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="#7c3aed" opacity="0.8"/></pattern></defs>
+          <rect width="400" height="200" fill="url(#g2)"/>
+          <rect x="60" y="50" width="80" height="100" rx="4" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
+          <rect x="160" y="30" width="80" height="120" rx="4" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.4"/>
+          <rect x="260" y="70" width="80" height="80" rx="4" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="project-body">
+        <div class="project-header">
+          <div class="project-name">Loan Pre-Approval System</div>
+          <div class="project-links">
+            <a href="#" class="project-link-btn" title="Live Demo">
+              <svg viewBox="0 0 24 24"><path d="M10 6v2H5v11h11v-5h2v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1h6zm11-3v8h-2V6.413l-7.793 7.794-1.414-1.414L17.585 5H13V3h8z"/></svg>
+              Live
+            </a>
+            <a href="#" class="project-link-btn github" title="GitHub">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              Code
+            </a>
+          </div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">React (TypeScript)</span><span class="stack-tag">Django</span><span class="stack-tag">PostgreSQL</span><span class="stack-tag">OCR (Tesseract)</span><span class="stack-tag">JWT</span>
+        </div>
+        <p class="project-desc">Secure dual-portal system with JWT auth, OTP verification, multi-tenant RBAC, and application tracking. Automated customer rating and document validation engine using OCR and rule-based checks.</p>
+        <div class="project-features">
+          <div class="project-features-title">Key Features</div>
+          <ul class="features-list">
+            <li>Dual-portal: separate interfaces for applicants & bank officers</li>
+            <li>OTP-based authentication & JWT session management</li>
+            <li>OCR-powered document validation (NID, income proof, statements)</li>
+            <li>Automated credit scoring with rule-based financial assessment engine</li>
+            <li>Multi-tenant RBAC with granular permission controls</li>
+          </ul>
+        </div>
+        <div class="project-highlight">🤖 Assesses financial stability, document authenticity and completeness automatically.</div>
+      </div>
+    </div>
+
+    <!-- Project 03 -->
+    <div class="project-card reveal">
+      <div class="project-image-placeholder" style="--img-bg: linear-gradient(135deg, #021b1a 0%, #065f46 50%, #0a1628 100%)">
+        <span class="proj-icon">🌍</span>
+        <span class="proj-num-overlay">03</span>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.2" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="200,20 240,80 300,80 255,115 270,175 200,140 130,175 145,115 100,80 160,80" fill="none" stroke="#10b981" stroke-width="1.5"/>
+          <polygon points="200,50 225,90 270,90 235,115 248,158 200,132 152,158 165,115 130,90 175,90" fill="none" stroke="#10b981" stroke-width="0.5" opacity="0.4"/>
+          <circle cx="200" cy="100" r="80" fill="none" stroke="#10b981" stroke-width="0.5" opacity="0.3" stroke-dasharray="4 4"/>
+        </svg>
+      </div>
+      <div class="project-body">
+        <div class="project-header">
+          <div class="project-name">Think Climate BD</div>
+          <div class="project-links">
+            <a href="#" class="project-link-btn" title="Live Demo">
+              <svg viewBox="0 0 24 24"><path d="M10 6v2H5v11h11v-5h2v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1h6zm11-3v8h-2V6.413l-7.793 7.794-1.414-1.414L17.585 5H13V3h8z"/></svg>
+              Live
+            </a>
+            <a href="#" class="project-link-btn github" title="GitHub">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              Code
+            </a>
+          </div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">React</span><span class="stack-tag">OpenLayers</span><span class="stack-tag">Django</span><span class="stack-tag">PostGIS</span><span class="stack-tag">GeoServer</span>
+        </div>
+        <p class="project-desc">GIS decision-support platform covering Bangladesh's Division → District → Upazila hierarchy with dynamic WFS boundary rendering, hazard overlays, and cyclone shelter mapping.</p>
+        <div class="project-features">
+          <div class="project-features-title">Key Features</div>
+          <ul class="features-list">
+            <li>Interactive multi-level administrative boundary rendering (Division → Upazila)</li>
+            <li>Dynamic WFS layers for real-time hazard zone overlays</li>
+            <li>Cyclone shelter geolocation & capacity mapping</li>
+            <li>PostGIS spatial queries for flood risk and climate analytics</li>
+            <li>GeoServer tile serving for high-performance raster/vector display</li>
+          </ul>
+        </div>
+        <div class="project-highlight">🌍 National disaster preparedness and risk intelligence platform.</div>
+      </div>
+    </div>
+
+    <!-- Project 04 -->
+    <div class="project-card reveal">
+      <div class="project-image-placeholder" style="--img-bg: linear-gradient(135deg, #1a1000 0%, #78350f 50%, #0f172a 100%)">
+        <span class="proj-icon">🏛️</span>
+        <span class="proj-num-overlay">04</span>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.15" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+          <line x1="0" y1="100" x2="400" y2="100" stroke="#f59e0b" stroke-width="1"/>
+          <line x1="200" y1="0" x2="200" y2="200" stroke="#f59e0b" stroke-width="1"/>
+          <rect x="80" y="40" width="240" height="120" rx="2" fill="none" stroke="#f59e0b" stroke-width="0.8"/>
+          <rect x="110" y="70" width="180" height="60" rx="2" fill="none" stroke="#f59e0b" stroke-width="0.5" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="project-body">
+        <div class="project-header">
+          <div class="project-name">Centralized Standing Instruction Engine</div>
+          <div class="project-links">
+            <a href="#" class="project-link-btn github" title="GitHub">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              Code
+            </a>
+          </div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">PL/SQL</span><span class="stack-tag">Oracle 19c</span><span class="stack-tag">Core Banking</span>
+        </div>
+        <p class="project-desc">High-throughput banking automation engine processing 10K+ daily transactions across 500+ branches, automating 80+ core banking rules including debit/credit postings and penalty calculations.</p>
+        <div class="project-features">
+          <div class="project-features-title">Key Features</div>
+          <ul class="features-list">
+            <li>Processes 10,000+ standing instructions daily across 500+ bank branches</li>
+            <li>Automates 80+ CBS rules: debit/credit postings, penalties, interest calculations</li>
+            <li>Full compliance & audit trail with zero manual intervention</li>
+            <li>High-availability PL/SQL engine with exception handling & rollback safety</li>
+            <li>Scheduled batch execution with real-time exception reporting</li>
+          </ul>
+        </div>
+        <div class="project-highlight">✅ 100% elimination of manual intervention with full compliance and auditability.</div>
+      </div>
+    </div>
+
+    <!-- Project 05 -->
+    <div class="project-card reveal">
+      <div class="project-image-placeholder" style="--img-bg: linear-gradient(135deg, #0c1a2e 0%, #1e3a5f 50%, #0a0d12 100%)">
+        <span class="proj-icon">🧠</span>
+        <span class="proj-num-overlay">05</span>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.18" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="20" fill="none" stroke="#00d4ff" stroke-width="1"/>
+          <circle cx="200" cy="60" r="20" fill="none" stroke="#00d4ff" stroke-width="1"/>
+          <circle cx="200" cy="140" r="20" fill="none" stroke="#00d4ff" stroke-width="1"/>
+          <circle cx="300" cy="100" r="20" fill="none" stroke="#00d4ff" stroke-width="1"/>
+          <line x1="120" y1="100" x2="180" y2="65" stroke="#00d4ff" stroke-width="0.8" opacity="0.6"/>
+          <line x1="120" y1="100" x2="180" y2="135" stroke="#00d4ff" stroke-width="0.8" opacity="0.6"/>
+          <line x1="220" y1="65" x2="280" y2="98" stroke="#00d4ff" stroke-width="0.8" opacity="0.6"/>
+          <line x1="220" y1="138" x2="280" y2="102" stroke="#00d4ff" stroke-width="0.8" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="project-body">
+        <div class="project-header">
+          <div class="project-name">ViT Face Mask Detection</div>
+          <div class="project-links">
+            <a href="https://scholar.google.com/citations?user=xkqNzC0AAAAJ&hl=en" target="_blank" class="project-link-btn">
+              <svg viewBox="0 0 24 24"><path d="M10 6v2H5v11h11v-5h2v6a1 1 0 01-1 1H4a1 1 0 01-1-1V7a1 1 0 011-1h6zm11-3v8h-2V6.413l-7.793 7.794-1.414-1.414L17.585 5H13V3h8z"/></svg>
+              IEEE ↗
+            </a>
+            <a href="#" class="project-link-btn github" title="GitHub">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              Code
+            </a>
+          </div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span><span class="stack-tag">TensorFlow</span><span class="stack-tag">PyTorch</span><span class="stack-tag">Vision Transformer</span><span class="stack-tag">IEEE Published</span>
+        </div>
+        <p class="project-desc">Benchmarked Vision Transformer (ViT) model for improper face mask detection, outperforming CNN architectures including ResNet-50, VGG16, MobileNetV2, Inception, and Xception.</p>
+        <div class="project-features">
+          <div class="project-features-title">Key Features</div>
+          <ul class="features-list">
+            <li>ViT architecture fine-tuned on custom face mask dataset</li>
+            <li>Benchmark comparison vs 5 CNN models (ResNet-50, VGG16, MobileNetV2, etc.)</li>
+            <li>97% accuracy — surpassing all baseline CNN architectures</li>
+            <li>Both TensorFlow and PyTorch implementations evaluated</li>
+            <li>Published and peer-reviewed in IEEE journal</li>
+          </ul>
+        </div>
+        <div class="project-highlight">📊 97% accuracy — published in IEEE.</div>
+      </div>
+    </div>
+
+    <!-- Project 06 -->
+    <div class="project-card reveal">
+      <div class="project-image-placeholder" style="--img-bg: linear-gradient(135deg, #0f0e1a 0%, #1e1b4b 50%, #0a0d12 100%)">
+        <span class="proj-icon">📋</span>
+        <span class="proj-num-overlay">06</span>
+        <svg style="position:absolute;inset:0;width:100%;height:100%;opacity:0.15" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+          <rect x="50" y="30" width="300" height="140" rx="6" fill="none" stroke="#a78bfa" stroke-width="1"/>
+          <line x1="50" y1="65" x2="350" y2="65" stroke="#a78bfa" stroke-width="0.7"/>
+          <line x1="50" y1="100" x2="350" y2="100" stroke="#a78bfa" stroke-width="0.7"/>
+          <line x1="50" y1="135" x2="350" y2="135" stroke="#a78bfa" stroke-width="0.7"/>
+          <line x1="130" y1="30" x2="130" y2="170" stroke="#a78bfa" stroke-width="0.7"/>
+        </svg>
+      </div>
+      <div class="project-body">
+        <div class="project-header">
+          <div class="project-name">Digital Memo Numbering System</div>
+          <div class="project-links">
+            <a href="#" class="project-link-btn github" title="GitHub">
+              <svg viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              Code
+            </a>
+          </div>
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">AngularJS</span><span class="stack-tag">C#</span><span class="stack-tag">ASP.NET MVC</span><span class="stack-tag">MS SQL Server</span>
+        </div>
+        <p class="project-desc">Full-stack digital document management system for systematic memo numbering and workflow tracking, streamlining internal document operations across banking departments.</p>
+        <div class="project-features">
+          <div class="project-features-title">Key Features</div>
+          <ul class="features-list">
+            <li>Centralized auto-incrementing memo numbering across departments</li>
+            <li>Digital workflow routing — submission, review, approval & archival</li>
+            <li>Full document search & retrieval by memo number, date, department</li>
+            <li>Role-based access: staff, supervisor, and admin views</li>
+            <li>Eliminated all paper-based tracking across the organization</li>
+          </ul>
+        </div>
+        <div class="project-highlight">📋 Eliminated paper-based document tracking across the organization.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-header reveal">
+    <span class="section-num">05</span>
+    <h2 class="section-title">Education</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="edu-grid">
+    <div class="edu-card reveal">
+      <div class="edu-degree">PhD in Data Science</div>
+      <div class="edu-school">Bangladesh University of Engineering &amp; Technology (BUET)</div>
+      <div class="edu-period">April 2024 — Ongoing</div>
+      <span class="edu-badge">Part-Time · In Progress</span>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-degree">M.Sc. in Computer Science &amp; Engineering</div>
+      <div class="edu-school">Military Institute of Science and Technology (MIST)</div>
+      <div class="edu-period">Graduated July 2024</div>
+      <span class="edu-badge">Masters · Completed</span>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-degree">B.Sc. in Computer Science &amp; Engineering</div>
+      <div class="edu-school">Military Institute of Science and Technology (MIST)</div>
+      <div class="edu-period">Graduated January 2013</div>
+      <span class="edu-badge">Bachelors · Completed</span>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="section-header reveal">
+    <span class="section-num">06</span>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="certs-grid">
+    <div class="cert-card reveal">
+      <span class="cert-icon">🏅</span>
+      <div><div class="cert-name">Oracle Cloud Infrastructure 2023 Certified Data Science Professional</div><div class="cert-org">Oracle Corporation · September 2023</div></div>
+    </div>
+    <div class="cert-card reveal">
+      <span class="cert-icon">📊</span>
+      <div><div class="cert-name">Power BI for Beginners</div><div class="cert-org">Simplilearn · June 2022 · Code: 3513614</div></div>
+    </div>
+    <div class="cert-card reveal">
+      <span class="cert-icon">🎓</span>
+      <div><div class="cert-name">Post Graduate Diploma in Islamic Banking and Finance (IBF)</div><div class="cert-org">Academy of Business Professionals (ABP) · Jan–Nov 2024</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-header reveal">
+    <span class="section-num">07</span>
+    <h2 class="section-title">Publications</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="pub-card reveal">
+    <div class="pub-title">Vision Transformer-Based Deep Learning Techniques for Improper Face Mask-Wearing Detection</div>
+    <div class="pub-meta">
+      <span class="pub-venue">IEEE</span>
+      <span>·</span>
+      <span>A. S. M. Muntaheen et al.</span>
+      <span>·</span>
+      <a href="https://scholar.google.com/citations?user=xkqNzC0AAAAJ&hl=en" target="_blank" class="pub-link">View on IEEE ↗</a>
+    </div>
+  </div>
+  <p style="font-size:0.88rem; color: var(--muted); margin: 1rem 0 0.5rem;">For the complete list of publications, visit Google Scholar:</p>
+  <a href="https://scholar.google.com/citations?user=xkqNzC0AAAAJ&hl=en" target="_blank" class="pub-scholar-link">🎓 View All Publications on Google Scholar ↗</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>© 2026 A. S. M. Muntaheen · Dhaka, Bangladesh</div>
+  <div class="footer-social">
+    <a href="mailto:muntaheen.jobs@gmail.com">Email</a>
+    <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+    <a href="https://github.com" target="_blank">GitHub</a>
+    <a href="https://scholar.google.com/citations?user=xkqNzC0AAAAJ&hl=en" target="_blank">Scholar</a>
+  </div>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  reveals.forEach(el => observer.observe(el));
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id'); });
+    navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : ''; });
+  });
+</script>
+</body>
+</html>
